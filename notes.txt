@@ -1,0 +1,184 @@
+[Pre Optimisation]
+235x Black Wool (or any solid block, could be optimised away completely by digging the surface instead)
+238x Redstone Dust (requires multiple stacks, 4 required)
+115x Redstone Repeater (2 Stacks)
+50x Redstone Lamp (1 Stack)
+44x Redstone Torch (1 Stack)
+10x Stone Slab (1 Stack, replace with Glass in Bedrock)
+16x Redstone Comparator (1 Stack, will require mode switch)
+
+[Inventory Layout]
+[W][W][W][W] <-- If this isn't here then the instructions get a bit more complicated
+[D][D][D][D]
+[R][R][L][T]
+[S][C][_][_] <-- This row can be optimised out...?
+
+W - Wool
+D - Dust
+R - Repeater
+L - Lamp
+T - Torch
+S - Slab
+C - Comparator
+
+[Post Optimisation]
+0x Black Wool
+206x Redstone Dust (4 Stacks)
+50x Redstone Lamp (1 Stack)
+44x Redstone Torch (1 Stack)
+115x Redstone Repeater (2 Stacks)
+0x Stone Slab
+16x Redstone Comparator (1 Stack, will require mode switch, ~~creatix could do this~~ creatix can't use comparators)
+
+[Inventory Layout]
+[D][D][D][D]
+[R][R][L][T]
+[C][_][_][_]
+[_][_][_][_]
+
+D - Dust
+L - Lamp (could swap out lamps with comparators and build dirt in place)
+T - Torch
+R - Repeater
+C - Comparator (could swap out comparators with pistons)
+
+Quad Unit consists of 2 opposing shift registers, 2 sets of gates and 2 sets of memory
+Stone Slabs were required only to prevent lamps from falsely illuminating on neighboring signal
+Quad Unit can be further modularised to include 1 4-bit shift register and 1 bank of gates and memory
+This can also be built into dirt with pistons instead of comparators
+
+[Post Simplification]
+52x Redstone Dust (1 Stack)
+52x Redstone Lamp (1 Stack)
+36x Redstone Repeater (1 Stack)
+12x Redstone Torch (1 Stack)
+14x Redstone Lever (1 Stack)
+8x Sticky Piston (1 Stack)
+
+[Inventory Layout]
+[D][L][R][T] <-- Piston is needed
+[P][l][_][_] <-- Lever's optional
+[_][_][_][_] <== These 2 rows can
+[_][_][_][_] <== be optimised out
+
+D - Dust
+L - Lamp
+T - Torch
+R - Repeater
+P - Piston
+l - lever
+
+[Instructions]
+1.1 move front x2, mine down, move front, repeat 3x
+1.2 move front, turn back, move up, place down dust, 
+1.3 move front, place down dust, move front, move down, place down dust, move up, move front, place down dust, repeat x3
+1.4 turn left, move front, turn left, place down lamp
+1.5 move front x3, place down lamp, repeat x3
+1.6 move front x2, move down, turn back, place front torch
+1.7 move up, move front x3, move down, place front torch, repeat x3
+1.8 move up x2, move front x2, turn back, place down dust
+1.9 move front x3, place down dust, repeat x3
+2.0 move front, turn right, move forward, move down
+
+Sides: FBLRUD
+ - front
+ - back
+ - left
+ - right
+ - up
+ - down
+Commands: F#,B#,L#,R#,U#,D#,Ms,Psi,Ts#,X#
+ - move forward <times>
+ - move back <times>
+ - turn left <times>
+ - turn right <times>
+ - move up <times>
+ - move down <times>
+ - mine <side>
+ - place <side> <slot_id>
+ - toggle <side> <times>
+ - repeat_line <times>
+Numbers: Loop Command # Times
+Separators: , - \n
+Comments: // #
+
+[Inventory]
+1 - Redstone Dust
+2 - Redstone Lamp
+3 - Redstone Torch
+4 - Redstone Repeater
+5 - Redstone Lever
+6 - Sticky Piston
+
+[Instructions] //Intended for Creatix
+F2,MD,F1,X3\n
+F1,R2,U1,PD1\n
+F1,PD1,F1,D1,PD1,U1,F1,PD1,X3\n
+L1,F1,L1,PD2\n
+F3,PD2,X3\n
+F2,D1,L2,PF3\n
+U1,F3,D1,PF3,X3\n
+U2,F2,R2,PD1\n
+F3,PD1,X3\n
+\n
+F1,R1,F1,D1\n
+PD4,R1,F1,L1,PD4,R1,F2,L1,X4\n
+MD,R1,F1,R1,PD5,R1,F2,L1,U1,F2\n
+PD4,F1,PD4,F1,PD2,F1,X4\n
+L2,U1\n
+PD1,F3,X4\n
+D1,L1\n
+PD1,F1,X2\n
+L1,PF2,B1,PF5,U1,F1\n
+F2,L1,PD4,F1,PD1,R1,F1,PD1,R1,F1,PD4,L1,X4\n
+L1,F2,L1,U1,PD1\n
+F3,PD1,X3\n
+F1,L1,F3,L1\n
+\n
+PU2,PL2,F1,PU2,PR2,F1,X4\n
+R1,F1,R1,U2,F1,PD5\n
+F3,PD5,X3\n
+F1,R1,F2,R1,PD5\n
+F3,PD5,X3\n
+R1,F1,L1,F2\n
+R2-D2\n # :)
+F1,PU6,F1,PU6,F1,X4\n
+L2,U2\n
+MF,F1,MF,F2,X4\n
+R2-D2\n # :)
+\n
+L1,F1,R1\n
+F1,L1,PB2,PD4,R1,F1,R1,PD4,PF2,L1,F1,X3\n
+F1,L1,PB2,PD4,R1,F1,R1,PD4,PF2,B1,R1\n
+PD2,F1,PD2,F2,X3\n
+PD2,F1,PD2,U1\n
+PD1,B1,PD1,B2,X3\n
+PD1,B1,PD1,B1,D1,R1,F2,L1,D2,MD,D1\n
+MR,MF,F1,X11\n
+R1,MF,F1,L1\n
+PU2,B1,PU2,PF2,B1,PF3,U1,B1,PF5,TF2,X4\n
+U2,F2\n
+\n
+PD1,F1,PD1,F2,X3\n
+PD1,F1,PD1,L1,F1,L1,D1,PD1\n
+F3,PD1,X3\n
+F1,L1,B1,PF3\n
+L1,F3,R1,PF3,X3\n
+U1,R1,B1,PD1\n
+F3,PD1,X3\n
+F1,R1,PD4\n
+R1,F3,L1,PD4,X3\n
+L1\n
+F1,X11\n
+R1\n
+F1,X9\n
+R1,D1\n
+\n
+
+Rotation Fix: Use a Navigation Upgrade and a Wrench (and Debug Card along with Disk)
+nav = require("component").navigation
+nav.getFacing()
+3 = north, if north don't do anything
+if east (right), turn the wrench 1 time (clockwise)
+if south (back), turn it 2 times
+if west (left), turn it 3 times
